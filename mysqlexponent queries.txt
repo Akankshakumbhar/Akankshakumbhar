@@ -1,0 +1,575 @@
+
+-- create
+CREATE TABLE EMPLOYEE (
+  empId INTEGER PRIMARY KEY,
+  name TEXT NOT NULL,
+  dept TEXT NOT NULL
+);
+
+-- insert
+INSERT INTO EMPLOYEE VALUES (0001, 'Clark', 'Sales');
+INSERT INTO EMPLOYEE VALUES (0002, 'Dave', 'Accounting');
+INSERT INTO EMPLOYEE VALUES (0003, 'Ava', 'Sales');
+INSERT INTO EMPLOYEE VALUES (0004, 'Ava', 'Accounting');
+INSERT INTO EMPLOYEE VALUES (0005, 'cva', 'Sales');
+INSERT INTO EMPLOYEE VALUES (0006, 'va', 'Sales');
+
+
+-- fetch 
+
+select * from EMPLOYEE where dept='accounting' or empId=0001;
+select * from EMPLOYEE where name='Dave' and empId=0002;
+
+select * from EMPLOYEE order by name desc;
+select name from EMPLOYEE order by name asc;
+select name from EMPLOYEE order by empId;
+select dept from EMPLOYEE order by name;
+select name from EMPLOYEE group by name;
+select empId from EMPLOYEE group by empId;
+select name from EMPLOYEE where empId > 0002;
+select * from EMPLOYEE order by dept;
+select name from EMPLOYEE group by name;
+select * from  EMPLOYEE  limit 3;
+select name from EMPLOYEE limit 3,6;
+select name from EMPLOYEE limit 2,5;
+
+
+
+
+
+
+
+                                                                 ////////Personal info////////
+create table  personalinfo(id int, name varchar(20),adress varchar(20),annualsalary int);
+insert into personalinfo values(1,'akanksha','pune',10000);
+insert into personalinfo values(2,'akanksha','mumbai',20000);
+insert into personalinfo values(3,'aum','pune',110000);
+insert into personalinfo values(4,'gauri','nodia',10000);
+insert into personalinfo values(5,'sakshi','hyderabad',90000);
+insert into personalinfo values(6,'gaurvi','mumbai',10000);
+insert into personalinfo values(7,'om','nodia',100000);
+insert into personalinfo values(8,'samy','pimpri',130000);
+insert into personalinfo values(9,'amey','nigdi',150000);
+select * from personalinfo;
+select annualsalary /12 from  personalinfo;
+select name,annualsalary/12 from personalinfo order by annualsalary/12 desc limit 1;//name of emplyee having maxinum montly annualsalary
+select name,annualsalary/12 from personalinfo order by annualsalary/12 asc limit 3;
+select id ,name from personalinfo order by id desc;
+select name,annualsalary/12 from personalinfo order by annualsalary/12 desc limit 1,1;//select name of employee having 2nd most annualsalary
+select max(id) from personalinfo;
+select  min(annualsalary/12) from personalinfo ;
+select count(name) from personalinfo;
+select sum(id) from personalinfo;
+select avg(id) from personalinfo;
+         //alter table (table name ) to do any updations on table (columns add  data type ,but not on data inside the table only for table related )
+alter table personalinfo  add phone varchar(29) ;
+select * from personalinfo;
+alter table personalinfo rename  to pinfo;//rename to keyword(rename name of table)
+alter table pinfo add gender varchar(30);
+select * from pinfo;
+alter table pinfo add age int after adress;
+select *  from pinfo;
+alter table pinfo add dob int  after age;//(add keyword) add new column
+select * from pinfo;
+alter table pinfo  modify age varchar(20);// modify keyword (change data type)
+
+      ///to update data inside the table (actuall data)////
+update  pinfo  set adress='pcmc' where name='aum';
+select adress from pinfo where name='aum';///(set)keyword is used to update any record
+delete from pinfo where name='samy';//(delete is used) delete specific record only
+truncate table pinfo;/// delete all record structure will reamain same table (like skeleton)
+drop table pinfo;///drop everything along with structure
+
+#######regular expressions(starts ,end with)#########################
+select * from EMPLOYEE where dept regexp '^A';
+select name from EMPLOYEE where name regexp '^C';
+select * from EMPLOYEE where dept regexp 'g$';
+select * from EMPLOYEE where name regexp 'a$';
+select *from EMPLOYEE where dept regexp 'un';
+
+////////////////////////////////Joins//////////////////////////////////////////
+
+
+-- create
+CREATE TABLE personal (
+  id INTEGER PRIMARY KEY,
+  name TEXT NOT NULL,
+  adress TEXT NOT NULL
+);
+CREATE TABLE client (
+  cid INTEGER PRIMARY KEY,
+  name TEXT NOT NULL,
+  adress TEXT NOT NULL,
+  accontno int,
+  salary int
+);
+
+-- insert
+INSERT INTO personal VALUES (0001, 'Clark', 'pune');
+INSERT INTO personal VALUES (0002, 'Dave', 'mumbai');
+INSERT INTO personal VALUES (0003, 'Ava', 'pune');
+
+INSERT INTO client VALUES (0001, 'Cla', 'nigdi',0012,4000);
+INSERT INTO client VALUES (0002, 'Davet', 'pcmc',3000,300000);
+INSERT INTO client VALUES (00033, 'Avab', 'pune',0089,200000);
+INSERT INTO client VALUES (00019, 'Clark', 'pune',345,5666);
+INSERT INTO client VALUES (00002, 'Dave', 'pcmc',5667,90000);
+INSERT INTO client VALUES (00039, 'Ava', 'xcx',4677,600000);
+
+
+
+-- fetch 
+
+select a.name,a.adress ,b.accontno ,b.salary from personal a,client b where a.id=b.cid; 
+select a.name,a.adress,b.accontno,b.salary from personal a left outer join client b on a.id=b.cid;
+select a.name,a.adress,b.salary from personal a right outer join client b on a.id=b.cid;
+select a.name,b.salary from personal a left outer join client b on a.id=b.cid;
+select a.adress ,b.accontno from personal a ,client b where a.id=b.cid; 
++-------+--------+----------+--------+
+| name  | adress | accontno | salary |
++-------+--------+----------+--------+
+| Clark | pune   |       12 |   4000 |
+| Dave  | mumbai |     5667 |  90000 |
++-------+--------+----------+--------+
++-------+--------+----------+--------+
+| name  | adress | accontno | salary |
++-------+--------+----------+--------+
+| Clark | pune   |       12 |   4000 |
+| Dave  | mumbai |     5667 |  90000 |
+| Ava   | pune   |     NULL |   NULL |
++-------+--------+----------+--------+
++-------+--------+--------+
+| name  | adress | salary |
++-------+--------+--------+
+| Clark | pune   |   4000 |
+| Dave  | mumbai |  90000 |
+| NULL  | NULL   |   5666 |
+| NULL  | NULL   | 200000 |
+| NULL  | NULL   | 600000 |
+| NULL  | NULL   | 300000 |
++-------+--------+--------+
++-------+--------+
+| name  | salary |
++-------+--------+
+| Clark |   4000 |
+| Dave  |  90000 |
+| Ava   |   NULL |
++-------+--------+
++--------+----------+
+| adress | accontno |
++--------+----------+
+| pune   |       12 |
+| mumbai |     5667 |
++--------+----------+
+
+Q2))////joins////
+create table personalinfo(id int, name varchar(40),adress varchar(20));
+create table professionalinfo (id int ,accno varchar(10),salary int);
+create table eductionalinfo (id int,grade varchar(10),percentage int);
+insert into personalinfo values(01,'akanksha','pune');
+insert into personalinfo values(02,'akankshaqw','mumbai');
+
+insert into personalinfo values(03,'akankshaoo','pune');
+
+insert into personalinfo values(04,'akankshayt','mumbai');
+
+insert into personalinfo values(05,'akankshaer','pcmc');
+
+insert into personalinfo values(06,'akankshayu','nigdi');
+
+insert into personalinfo values(07,'akankshioa','pimpri');
+
+insert into personalinfo values(08,'akanksharr','pimpri');
+
+insert into personalinfo values(09,'akankshawe','pune');
+
+insert into professionalinfo values(01,'12234',300000);
+insert into professionalinfo values(02,'122374',900000);
+insert into professionalinfo values (03,'122349',300000);
+insert into professionalinfo values (006,'1223674',400000);
+insert into professionalinfo values(009,'1223684',700000);
+insert into professionalinfo values (005,'1223344',2300000);
+
+
+insert into eductionalinfo values(001,'pass',59);
+insert into eductionalinfo values (002,'pass',99);
+insert into eductionalinfo values (003,'fail',89);
+insert into eductionalinfo values (004,'fail',69);
+insert into eductionalinfo values (005,'pass',90);
+insert into eductionalinfo values (006,'pass',89);
+select * from professionalinfo;
+select * from eductionalinfo;
+select * from personalinfo;
+select adress from personalinfo group by adress;
+select percentage from eductionalinfo order by percentage asc;
+select a.name ,b.percentage from personalinfo a ,eductionalinfo b order by percentage desc limit 1;
+select a.name ,b.grade from personalinfo a, eductionalinfo b  limit 4;
+select a.name ,b.salary ,c.grade from personalinfo a, professionalinfo b, eductionalinfo c where a.id=b.id=c.id;
+//name of employee having per >50 and salary>1000/////
+select a. name,b.percentage,c.salary from personalinfo a ,professionalinfo c,eductionalinfo b where a.id=b.id=c.id  and c.salary > 300000 and b.percentage > 89 ;
+///name of student having salary>20000 and those who passed in exam belong to mumbai//////
+select a.name,b.salary ,c.grade from personalinfo a,professionalinfo b,eductionalinfo c  where a.id=b.id=c.id and b.salary >300000 and grade='pass' and a.adress='mumbai';
+one more question???
+count the no of student having per > 50 and those who belongs to pune?
+select count(*) from  eductionalinfo  e full outer join  personalinfo  p on e.id=p.id where e.per >50 and p.adress='pune';
+
+
+
+
+///problem statemts////
+
+-- create
+CREATE TABLE EMPLOYEE (id int,fname varchar(39),lname varchar(20),email varchar(30),
+noumber varchar(10),hire_date int ,job_id varchar(10),salary int,commission int,managerid int,
+depid int);
+
+  
+
+
+-- insert
+INSERT INTO EMPLOYEE VALUES (0001, 'Clark', 'kumbhar','adysds@gmail','1234596786',1987-09-17,'21256',34000,1248,485,495677);
+INSERT INTO EMPLOYEE VALUES (0002, 'aum', 'kumbhar','adsdis@gmail','1234567806',1987-08-17,'212568',44000,124,45,45677);
+INSERT INTO EMPLOYEE VALUES (0003, 'Chinu', 'pawar','adsd3s@gmail','1234567867',1987-05-17,'212560',54000,1248,452,456770);
+INSERT INTO EMPLOYEE VALUES (0004, 'Cinti', 'shinde','ads8ds@gmail','1234567869',1987-09-17,'212586',24000,1284,495,405677);
+INSERT INTO EMPLOYEE VALUES (0005, 'Chiuu', 'singh','adsds09@gmail','1234567865',1987-06-17,'291256',34000,1247,459,495677);
+
+
+-- fetch 
+SELECT * FROM EMPLOYEE ;
+select fname,managerid,salary from EMPLOYEE;
+select count(fname) from EMPLOYEE  order by hire_date desc;
+select fname from EMPLOYEE order by hire_date desc limit 2;
+select max(salary) from EMPLOYEE ;
+select * from EMPLOYEE order by salary asc limit 3;
+select max(salary),min(salary) from EMPLOYEE;
+ select fname from EMPLOYEE where salary >24000;
+ select reverse(fname) from EMPLOYEE where fname='aum';
+
+
+
+-- create
+create table ak(id int,name varchar(30),age int);
+insert into ak values(1,'aks',22);
+insert into ak values(2,'sd',21);
+insert into ak values(14,'sd',22);
+select * from ak;
+select name from ak ;
+select * from ak where name='sd';
+select age,name from ak;
+select * from ak where name='aks' and age=22;
+select * from ak order by name desc;
+select * from ak order by age ;
+
+select * from ak limit 2;
+
+
+
+create table pernalinfo(id int ,name varchar(20),adress varchar(50),annualsalary int);
+insert into pernalinfo values(1,'aknksha','pune ',20000);
+insert into pernalinfo values(2,'aum','mumbai ',500000);
+insert into pernalinfo values(3,'pravin','pen ',60000);
+insert into pernalinfo values(4,'sammy','pcmc ',10000);
+insert into pernalinfo values(5,'deeps','wakad ',220000);
+insert into pernalinfo values(6,'gauri','pcmc ',30000);
+insert into pernalinfo values(7,'shiv',' penvel',40000);
+insert into pernalinfo values(8,'divya',' nigdi ',60000);
+insert into pernalinfo values(9,'pankaj',' bhosri ',70000);
+insert into pernalinfo values(10,'amey',' nigdi ',80000);
+select * from pernalinfo;
+select annualsalary from pernalinfo;
+select max(annualsalary) from pernalinfo;
+select max(id)from pernalinfo;
+select min(id)from pernalinfo;
+select sum(id) from pernalinfo;
+alter table pernalinfo add lastname  varchar(100) after name;
+
+
+show databases;
+update pernalinfo set adress='pcmc' where id=1;
+select * from pernalinfo;
+delete from pernalinfo where id =2;
+select * from pernalinfo;
+truncate table pernalinfo;
+select* from pernalinfo;
+drop table pernalinfo;
+select * from pernalinfo;
+  
+  
+  
+  
+  
+  
+create table employee(id int,fname varchar(30),lname varchar(25),email varchar(25),phone_no varchar(10),hire_date date,jod_id varchar(10),salary int,commission_pct int,manager_id int,department_id int);
+insert into employee values(1,'aum','kumbhar','aum6@gmail.com','9980761415','1987-06-17','1234',20000,1345,56,123);
+insert into employee values(2,'akanksha','kumbhar','akanksha6@gmail.com','9960761415','1987-07-17','12344',30000,13465,567,1253);
+insert into employee values(3,'gauri','kumbhar','gauri6@gmail.com','9980561415','1987-01-19','1204',50000,13465,567,1233);
+insert into employee values(4,'deepali','pawar','deepali6@gmail.com','9980701415','1983-01-17','12534',60000,13445,563,1213);
+
+
+
+
+create table employee(id int,fname varchar(30),lname varchar(25),email varchar(25),phone_no varchar(10),hire_date date,jod_id varchar(10),salary int,commission_pct int,manager_id int,department_id int);
+insert into employee values(1,'aum','kumbhar','aum6@gmail.com','9980761415','1987-06-17','1234',20000,1345,56,123);
+insert into employee values(2,'akanksha','kumbhar','akanksha6@gmail.com','9960761415','1987-07-17','12344',30000,13465,567,1253);
+insert into employee values(3,'gauri','kumbhar','gauri6@gmail.com','9980561415','1987-01-19','1204',50000,13465,567,1233);
+insert into employee values(4,'deepali','pawar','deepali6@gmail.com','9980701415','1983-01-17','12534',60000,13445,563,1213);
+
+create table department(id int,name varchar(20),demployee varchar(20));
+
+
+
+select * from employee;
+select  salary,email,manager_id from employee;
+ 
+select fname from employee  order by id asc;
+select lname from employee  group by lname;
+select * from employee limit 2;
+select  count(*) from employee;
+select count(id) from employee;
+select max(id) from employee;
+select department_id,max(salary) from employee group by department_id ;
+select *from employee order by salary asc limit 2;
+select  fname, reverse(fname) from employee ;
+select lname,email,reverse(lname),reverse(email) from employee;
+select reverse(lname) from employee where lname='pawar';
+select * from employee where hire_date >5;
+select min(salary),max(salary) from employee;
+select hire_date ,count(id) from employee group by hire_date;
+select count(id)from employee order by  manager_id desc;
+select sum(salary) from employee;
+select salary/12 from employee;
+select fname ,min(salary) from employee group by fname limit 2;
+select fname,max (salary) from employee where group by fname;
+
+
+
+
+
+
+
+//problem statement///
+Product table (10 records)
+
+productid productname orderid quantity sales price year oaddress
+
+
+1.Find out top 2 product with maximun revenue?
+
+2.count the number of cities with maximum sales?     1000
+
+3.count the number of product based on cities?
+
+pune     30
+mumbai    40 
+
+4.findout total revenue based on year?
+
+2012    100000
+2013    20000000
+2014     3000000
+
+
+
+
+CREATE TABLE product (
+  pid INTEGER PRIMARY KEY,
+  name TEXT NOT NULL,
+  orderid int NOT NULL,
+  quantity int,sales int,price int,year int  ,city text
+);
+
+-- insert
+INSERT INTO product VALUES (0001, 'pen', 123,2,24,34,2012,'pune');
+INSERT INTO product VALUES (0002, 'pencil',23,4,65,20,2034, 'mumbai');
+INSERT INTO product VALUES (0003, 'pencil',237,41,65,209,2034, 'mumbai');
+
+
+-- fetch 
+SELECT * FROM product;
+
+select name from product order by price  desc limit 1;
+
+select count(city) ,sales from product group by sales order by sales desc limit 2;
+select count(city),max(sales) as t from product group by city order by t desc;
+select count(*) ,city from product  group by city;
+select sum(price),year from product group by year;
+
+
+
++-----+--------+---------+----------+-------+-------+------+--------+
+| pid | name   | orderid | quantity | sales | price | year | city   |
++-----+--------+---------+----------+-------+-------+------+--------+
+|   1 | pen    |     123 |        2 |    24 |    34 | 2012 | pune   |
+|   2 | pencil |      23 |        4 |    65 |    20 | 2034 | mumbai |
+|   3 | pencil |     237 |       41 |    65 |   209 | 2034 | mumbai |
++-----+--------+---------+----------+-------+-------+------+--------+
++--------+
+| name   |
++--------+
+| pencil |
++--------+
++-------------+-------+
+| count(city) | sales |
++-------------+-------+
+|           2 |    65 |
+|           1 |    24 |
++-------------+-------+
++-------------+------+
+| count(city) | t    |
++-------------+------+
+|           2 |   65 |
+|           1 |   24 |
++-------------+------+
++----------+--------+
+| count(*) | city   |
++----------+--------+
+|        1 | pune   |
+|        2 | mumbai |
++----------+--------+
++------------+------+
+| sum(price) | year |
++------------+------+
+|         34 | 2012 |
+|        229 | 2034 |
++------------+------+
+ 
+
+
+
+
+
+
+
+
+
+
+				******************************************** sqllite3****************************************
+import sqlite3
+
+import pandas
+
+data=pandas.read_csv(r'C:\Users\Star\Desktop\Stuffs(IMP)\dataScience expotent files\sample.txt')# sample contain the data(already)
+conn=sqlite3.connect('employee.db') # database
+data.to_sql('sample',conn,if_exists='replace',index=False) # sample (table in employee database)
+data=pandas.read_sql_query("select * from sample",conn)
+a=pandas.read_sql_query("select weight from sample where co2=1",conn)
+
+
+print(data)
+print(a)
+
+
+import pandas
+d={"cal":[1,2,3],"nos":[100,200,300]}
+dat=pandas.DataFrame(d)
+import sqlite3
+conn=sqlite3.connect('Exponent.sqlite3') #database name
+dat.to_sql('employee',conn,if_exists='replace',index=False) # employee is the table
+
+dat=pandas.read_sql_query("select * from employee",conn)
+print(dat)
+conn.close()
+
+
+d={"id":[1,2,3],"name":['akanksha','aum','gauri'],"adress":['pune','mumbai','banglore']}
+dt=pandas.DataFrame(d)
+print(dt)
+conn=sqlite3.connect('akanksha.sqlite3')
+dt.to_sql('student',conn,if_exists="replace",index=False)
+dt=pandas.read_sql_query("select name from student",conn)
+print(dt)
+s=pandas.read_sql_query("select s.name,e.nos from student s join employee e on  s.id=e.cal",conn)
+print(s)
+i=pandas.read_sql_query("select * from student where name like '%a' or  id between 1 and 3 ",conn)
+print(i)
+
+y=pandas.read_sql_query("select * from student where adress not in ( 'pune' ,'mumbai') ",conn)
+print(y)
+
+
+
+p=pandas.read_sql_query("select * from student where adress in ( 'pune' ,'mumbai') ",conn)
+print(p)
+
+t=pandas.read_sql_query("select name from student  group by name having adress like'm%'",conn)
+print(t)
+
+'''import pandas as pd
+import sqlite3
+
+# Define and connect to the SQLite database
+conn = sqlite3.connect('akanksha.sqlite3')
+
+# Create 'employee' table
+dat = pd.DataFrame({
+    "cal": [1, 2, 3],
+    "nos": [100, 200, 300]
+})
+dat.to_sql('employee', conn, if_exists='replace', index=False)
+
+# Verify 'employee' table creation
+employee_check = pd.read_sql_query("SELECT * FROM employee", conn)
+print("Employee table:")
+print(employee_check)
+
+# Create 'student' table
+dt = pd.DataFrame({
+    "id": [1, 2, 3],
+    "name": ['akanksha', 'aum', 'gauri'],
+    "adress": ['pune', 'mumbai', 'banglore']
+})
+dt.to_sql('student', conn, if_exists='replace', index=False)
+
+# Verify 'student' table creation
+student_check = pd.read_sql_query("SELECT * FROM student", conn)
+print("Student table:")
+print(student_check)
+
+# Run the join query
+try:
+    result = pd.read_sql_query("SELECT s.name, e.nos FROM student s JOIN employee e ON s.id = e.cal", conn)
+    print("Join result:")
+    print(result)
+except pd.io.sql.DatabaseError as e:
+    print("DatabaseError:", e)
+
+# Close the connection
+conn.close()
+'''
+$$$$$ union $$$$$$$$$$$$
+
+o=pandas.read_sql_query("select name from student union select adress from student where adress='pune'",conn)
+print(o)
+
+
+
+
+
+
+	##########################################Sqllite3(DML,DDL)#################################################
+
+
+import sqlite3
+conn=sqlite3.connect('A.db')
+cur=conn.cursor()
+cur.execute('create table ete (eno int primary key,ename text)')
+cur.execute('insert into ete values(1,"aknaksha")')
+cur.execute('insert into ete values(2,"aum")')
+#eno=int(input("enter the  id"))
+#ename=input("enter the name")
+#cur.execute(f'INSERT INTO ee (eno, ename) VALUES ({eno}, "{ename}")')
+row=cur.execute('select  * from ete')
+print(row.fetchall())
+t=cur.execute('select ename from ete where eno=1')
+print(t.fetchall())
+t=cur.execute("select ename from ete where ename like '%a'")
+print(t.fetchall())
+
+
+
+
+
+
+
+
+
