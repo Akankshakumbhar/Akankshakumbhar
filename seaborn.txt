@@ -1,0 +1,91 @@
+
+Seaborn:-
+
+import seaborn as sb
+print(sb.get_dataset_names())
+
+
+Histogram:-
+
+
+>>> import pandas as pd
+>>> import seaborn as sb
+>>> from matplotlib import pyplot as plt
+>>> df=sb.load_dataset('iris')
+>>> sb.distplot(df['petal_length'],kde=False)
+ plt.show()
+ 
+ 
+ or
+ 
+ 
+ KDE(kernel distribution estimate) plot:-
+ 
+ 
+ >>> import pandas as pd
+>>> import seaborn as sb
+>>> from matplotlib import pyplot as plt
+>>> df=sb.load_dataset('iris')
+>>> sb.distplot(df['petal_length'],kde=True)
+ plt.show()
+ 
+ 
+ 
+ 3.colour pallete:-
+ 
+ 
+ 
+cp=sb.color_palette()
+sb.palplot(cp)
+plt.show()
+
+or
+
+cp=sb.color_palette("Greens")
+sb.palplot(cp)
+plt.show()
+
+
+4.Barplot:-
+>>> df = sb.load_dataset('titanic')
+>>> print(df.head())
+sb.barplot(x="alive",y="survived",hue="class",data=df)
+
+>>> plt.show()
+
+
+5.lmplot:- 
+
+df = sb.load_dataset('tips')
+df.head()
+sb.lmplot(x="size",y="tip",data=df)
+plt.show()
+
+
+6.Boxplot:-
+
+>>> df=sb.load_dataset("iris")
+>>> df.head()
+>>> sb.boxplot(data=df,orient="h")
+>>> plt.show()
+>>> sb.boxplot(data=df,orient="v")
+>>> plt.show()
+
+7. Facetgrid:- 
+
+
+df=sb.load_dataset("tips")
+df.head()
+g=sb.FacetGrid(df,col="day")
+g.map(plt.hist,"tip")
+plt.show()
+
+
+8. Pair grid:-
+
+
+df=sb.load_dataset("tips")
+df.head()
+g=sb.PairGrid(df)
+g.map(plt.scatter)
+plt.show()

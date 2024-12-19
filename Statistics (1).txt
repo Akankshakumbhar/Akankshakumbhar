@@ -1,0 +1,116 @@
+********************Statistics********************
+
+1. Mean:- 
+
+import statistics 
+
+d=[1,2,3,4,5]
+
+print(statistics.mean(d))    ---->3 
+
+f=[-7,-5,-2,2,3,4]
+
+print(statistics.mean(f))       -->5
+
+
+
+or
+
+data=pandas.read_csv(r"file.txt") 
+
+data (id,name,address)
+
+print(data['id'])
+
+print(data['id'].mean())               --average
+
+
+
+
+2.Median
+
+
+d=[1,2,3,4,5,6]
+print(statistics.median(d))              ----median()
+
+
+or 
+
+data=pandas.read_csv(r"file.txt") 
+
+data (id,name,address)
+
+print(data['id'])
+
+print(data['id'].median())   
+
+
+3.Mode:- 
+
+import statistics
+
+d=[1,2,3,3,4,5,4,4,4,5,6]
+print(statistics.mode(d)) 
+
+or
+
+data=pandas.read_csv(r"file.txt") 
+
+data (id,name,address)
+
+print(data['id'])
+
+print(data['id'].mode())
+
+
+4.Standard deviation:-
+
+
+variation of data with reference to mean
+
+
+1,2,3,4,5,6   --3
+
+print(data['id'].std())
+
+
+5.quantile values:-
+
+(1,2,3,4,5,6)  -30   (0.5,0.25,1.5,2.5)
+
+data=pandas.read_csv(r"file.txt") 
+
+data (id,name,address)
+
+data['id'].quantile([0.05,0.25,0.5])
+
+data['id'].quantile(0.5)-data['id'].quantile(0.25)
+
+
+6.Variance:-
+
+How far our actual data from mean is variance.
+
+>>> d=[1,2,3,4,5]
+>>> print(statistics.variance(d))
+
+   
+7.harmonic mean:-
+
+reciprocal of avg of reciprocal of data values.
+
+1/avg/data
+
+d=[1,2,3,4]
+
+print(statictics.harmonic_mean(d))  
+
+
+
+
+
+
+
+
+ 
+

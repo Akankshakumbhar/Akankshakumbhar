@@ -1,0 +1,93 @@
+************Scipy**************
+
+pandas -->numpy--->scipy
+
+scipy stands scientific python(constant) and is used to for optimization,stats and signal processing.
+
+
+>pip install scipy
+
+>import scipy 
+
+>from scipy import constants
+
+>print(scipy.__version__)   ---->to version
+
+>print(constants.pi)   --->
+
+>print(dir(constants))
+ 
+ 
+ >>> print(constants.yotta)
+1e+24
+>>> print(constants.hour)
+3600.0
+>>> print(constants.minute)
+60.0
+>>> print(constants.day)
+86400.0
+>>> print(constants.week)
+604800.0
+>>> print(constants.year)
+31536000.0
+>>> print(constants.inch)
+0.0254
+>>> print(constants.foot)
+0.30479999999999996
+>>> print(constants.litre)
+0.001
+>>> print(constants.kmh)
+0.2777777777777778
+>>> print(constants.degree_Fahrenheit)
+0.5555555555555556
+>>> print(constants.hp)
+745.6998715822701
+>>>
+
+
+Optimization:-
+
+from scipy.optimize import root
+
+from math import cos
+
+def eqn(x):
+           return x+cos(x)
+
+myroot=root(eqn,0)
+print(myroot,x)
+
+
+
+
+***************
+
+from scipy.optimize import root
+
+from math
+
+def add(a,b,c):
+               return a+b+c
+
+m=root(add,[10,20,30])
+>print(m,a,b,c)
+
+
+*****************Matlab*************
+
+calculation -->export mat file-->matlab tool
+
+from scipy import io
+import numpy as np
+
+arr=np.arrange(10)
+
+io.savemat('array.mat',{"vec":arr})
+
+dataframe --data
+
+data.write_csv("/desktop/swap/employee.csv")
+
+data.write_excel("/desktop/swap/employee.xlsx")
+
+data.write_textfile("/desktop/swap/employee.txt")

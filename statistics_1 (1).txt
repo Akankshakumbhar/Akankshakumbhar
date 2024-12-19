@@ -1,0 +1,257 @@
+
+
+
+1)Residual eroor
+Residual = actual y value − predicted y value
+
+This difference between the data point and the line is called the residual.
+
+e.g 
+
+yi=axi+b
+=23.91+0.22xi
+
+Residual = actual y value − predicted y value
+
+
+code:-
+
+modelname.fit(xtrain, ytrain)
+prediction = modelname.predict(x_test)
+residual = (y_test - prediction)
+
+e.g.
+
+xtrain=[1,2,3]
+ytrain=[2,3,4]
+xtest=[4,5,6]
+ytest=[5,6,7]
+
+dtree.fit(xtrain, ytrain)
+prediction = dtree.predict(x_test)
+residual = (y_test - prediction)
+
+
+2)Sum of squred eroor
+
+SSE represents sum of squares error, also known as residual sum of squares. It is the difference between the observed value and the predicted value.
+
+The sum of squared differences between predicted data points (ŷi) and observed data points (yi).
+
+
+SSE = Σ(ŷi – yi)2
+
+
+code:-
+
+
+import pandas as pd
+
+#create pandas DataFrame
+df = pd.DataFrame({'hours': [1, 1, 1, 2, 2, 2, 2, 2, 3, 3,
+                             3, 4, 4, 4, 5, 5, 6, 7, 7, 8],
+                   'score': [68, 76, 74, 80, 76, 78, 81, 84, 86, 83,
+                             88, 85, 89, 94, 93, 94, 96, 89, 92, 97]})
+
+#view first five rows of DataFrame
+df.head()
+
+	hours	score
+0	1	68
+1	1	76
+2	1	74
+3	2	80
+4	2	76
+
+
+import statsmodels.api as sm
+
+#define response variable
+y = df['score']
+
+#define predictor variable
+x = df[['hours']]
+
+model = DecisionTreeClassifier()
+model = dtree.fit(x, y)
+
+
+
+import numpy as np
+
+#calculate Sum of Squares Error (SSE)
+sse = np.sum((model.fittedvalues - df.score)**2)
+print(sse)
+
+331.07488479262696
+
+#calculate Sum of Squares Regression (SSR) 
+ssr = np.sum((model.fittedvalues - df.score.mean())**2)
+print(ssr)
+
+917.4751152073725
+
+#calculate Sum of Squares Total (SST) 
+sst = ssr + sse
+print(sst)
+
+1248.5499999999995
+
+3)Sum of squred regression
+
+The sum of squared differences between predicted data points (ŷi) and the mean of the response variable(y).
+
+
+SSR = Σ(ŷi – y)2
+
+4)Sum of squre total
+
+The sum of squared total is addition of SSE and SSR.
+
+sst = ssr + sse
+print(sst)
+
+
+
+5)R score value:- 
+
+
+The value for R-squared can range from 0 to 1 where: 0 indicates that the response variable cannot be explained by the predictor variable at all. 1 indicates that the response variable can be perfectly explained without error by the predictor variables
+
+code:-
+
+
+
+
+from sklearn.metrics import r2_score 
+
+
+
+### Assume y is the actual value and f is the predicted values 
+y =[10, 20, 30] 
+f =[10, 20, 30] 
+r2 = r2_score(y, f) 
+print('r2 score for perfect model is', r2)      --->1
+
+or
+
+y =[10, 20, 30] 
+f =[20, 20, 30] 
+r2 = r2_score(y, f) 
+print('r2 score for perfect model is', r2)      --->0
+
+
+
+
+
+6)Adjsted r score use
+The adjusted R-squared is a modified version of R-squared that adjusts for the number of predictors in a regression model. It is calculated as:
+
+Adjusted R2 = 1 – [(1-R2)*(n-1)/(n-k-1)]
+
+
+    R2: The R2 of the model
+    n: The number of observations
+    k: The number of predictor variables
+
+
+Since R2 always increases as you add more predictors to a model, adjusted R2 can serve as a metric that tells you how useful a model is, adjusted for the number of predictors in a model.
+
+code:-
+
+from sklearn.linear_model import LinearRegression
+import pandas as pd
+
+#define URL where dataset is located
+url = "https://raw.githubusercontent.com/Statology/Python-Guides/main/mtcars.csv"
+
+#read in data
+data = pd.read_csv(url)
+
+#fit regression model
+model = LinearRegression()
+X, y = data[["mpg", "wt", "drat", "qsec"]], data.hp
+model.fit(X, y)
+
+#display adjusted R-squared
+1 - (1-model.score(X, y))*(len(y)-1)/(len(y)-X.shape[1]-1)
+
+0.7787005290062521
+
+
+7)Std deviation
+8)Variance
+9)Bias- variance
+
+Bias is simply defined as the inability of the model because of that there is some difference or error occurring between the model’s predicted value and the actual value.
+
+
+These differences between actual or expected values and the predicted values are known as error or bias error or error due to bias. Bias is a systematic error that occurs due to wrong assumptions in the machine learning process
+Bias = SSE - Variance
+
+e.g 
+
+Predicted Output(Y) = Bias Term(b) + w1x1((Weight w1 associated with feature x1) + w2x2 + w3x3 +......+ wn*xn.
+
+code:-
+
+import numpy as np
+ from sklearn.datasets import load_boston
+  X, y = load_boston(return_X_y=True)
+
+# Split the dataset into train and test 
+  X_train, X_test, y_train, y_test = train_test_split(X, y, 
+  test_size=0.33, random_state=1)
+
+# Model definition
+  model_lr = LinearRegression()
+
+# Fitting training set into model
+  model_lr.fit(X_train, y_train)
+
+# Predicting using Linear Regression Model
+  Prediction = model_lr.predict(X_test)
+
+# Evaluating variance
+  Variance = np.var(Prediction)  # O/P : 56.55085515632455
+
+
+# Evaluating SSE
+  SSE = np.mean((np.mean(Prediction) - y)** 2)  
+  # O/P : 85.03300391390214
+
+# Evaluating Variance
+  Bias = SSE - Variance
+  # O/P : 28.482148757577583
+  
+  
+  
+10)T-test/P - value:-T-tests are used to determine if there is significant deference between means of two variables and lets us know if they belong to the same distribution.
+
+e.g 
+
+import numpy as np
+from scipy.stats import ttest_ind
+
+v1 = np.random.normal(size=100)
+v2 = np.random.normal(size=100)
+
+res = ttest_ind(v1, v2)
+
+print(res)
+
+
+
+
+ 11)Assumptions of linear regression
+ 
+ 
+ Mainly there are 7 assumptions taken while using Linear Regression:
+
+    Linear Model
+    No Multicolinearlity in the data
+    Homoscedasticity of Residuals or Equal Variances
+    No Autocorrelation in residuals
+    Number of observations Greater than the number of predictors
+    Each observation is unique
+    Predictors are distributed Normally

@@ -1,0 +1,67 @@
+*****************Matplotlib******************************
+
+matplotlib is used for data visualization.
+
+cmd>pip install matplotlib
+
+
+
+python>import matplotlib
+
+1.Plotting with line:-
+
+>import numpy as np
+>import matplotlib.pyplot  as plt
+>x=np.array([0,10])
+>y=np.array([0,200])
+
+>plt.plot(x,y)
+>plt.show()
+
+
+2.plotting with points:-
+
+>x=np.array([0,10])
+>y=np.array([0,200])
+plt.plot(x,y,'o')
+plt.show()
+
+3. plotting with marker:- 
+
+>x=np.array([0,10])
+>y=np.array([0,200])
+plt.plot(x,y,marker='*')
+plt.show()
+
+4.size change:-
+
+plt.plot(x,y,marker='*',ms=20)
+plt.show()
+
+5.backgraound colour:-
+
+
+plt.plot(x,y,marker='*',ms=20,mfc='r')
+
+6.dotted line:-
+
+plt.plot(x,y,linestyle='dotted',color='r')
+
+7.dashed line:-
+
+plt.plot(x,y,linestyle='dashed',color='r')
+
+8.line width:-
+
+
+plt.plot(x,y,linestyle='dashed',color='r',linewidth='20')
+
+
+
+youtube problem statment --category and count videos under each category visualization
+
+category  count
+
+
+x=data['count']
+y=data['category']

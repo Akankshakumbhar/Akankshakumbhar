@@ -1,0 +1,72 @@
+**************Pandas*****************************
+1.used to store the data in dataframe.
+2.Dataframe:- 2 dimensional data structure/2 dimensional array /data stored in tabular format.
+
+A.How to create the dataframe?
+
+1. csv:- 
+
+import pandas
+data=pandas.read_csv(r"filepath")
+print(data)
+
+
+2.Dictionary:-
+
+import pandas
+>d={"cal":[1,2,3],"nos":[100,200,300]}
+>data=pandas.DataFrame(d)
+>print(data)
+
+ >print(data.loc[1])
+ 
+ >print(data.loc[[0,1]])
+ 
+  >data=pandas.DataFrame(d,index=["day1","day2","day3"])
+  
+  >print(data.loc["day2"])
+
+
+
+3. Textfile:-
+file.txt  -->
+
+1,swap,pune
+2,raj,mumbai
+
+>data=pandas.read_csv('filepath',sep=',',header=None,names=["id,"name","address"])
+
+>print(data)
+
+
+4. excel:-
+
+>data=pandas.read_excel("filepath")
+>print(data)
+
+
+5.How to load dataframes in sql database (sqlilite):-
+
+
+>d={"cal":[1,2,3],"nos":[100,200,300]}
+>data=pandas.DataFrame(d)
+
+(command prompt:-pip install sqllite)
+
+>import sqllite
+
+conn=sqllite.connect('Exponent.sqllite')
+data.to_sql('employee',conn,if_exist='replace',index=False)
+
+conn.close()
+
+***************data storage validation****************
+
+conn=sqllite.connect('Exponent.sqllite')
+df=pandas.read_sql_query('select * from employee',conn)
+conn.close()
+print(df)
+
+
+
+

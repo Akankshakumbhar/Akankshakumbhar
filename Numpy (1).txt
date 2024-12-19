@@ -1,0 +1,85 @@
+*****************Numpy*******************
+
+Numpy library is used declare /store array.
+
+Array:- Collection of number elements/python object with same datatype.
+
+A.single dimensional array:-
+
+import numpy
+d=numpy.array([1,2,3,4,5,6])
+print(d)         --1,2,3,4,5,6
+
+g=numpy.array(['hi','hello','wow'])
+print(g)
+
+B. 2d array:-
+
+d=numpy.array([[1,2,3],[100,200,300]])
+print(d) 
+
+C. 3d array:-
+
+
+d=numpy.array([[[1,2,3],[100,200,300],[1000,2000,3000]]])
+print(d)
+
+print(d.ndim)              ---3
+
+
+d.Multidimensional array:-
+
+g=numpy.array([1,2,3,4],ndim=5)
+>print(g)
+
+
+E.Array slicing:-
+ 
+ 
+ a=numpy.array([1,2,3,4,5,6,7,8,9])
+ 
+ print(a[:4])           ---1,2,3,4,5     
+ print(a[2:])           ---3,4,5,6,7,8,9
+ print(a[1:5])        ---2,3,4,5(n,n-1)
+ print(a[1:5:3])          --2,3,4 (n,n-1,range)
+ 
+ 
+ b=numpy.array([[1,2,3],[100,200,300]])
+ print(b)
+ print(b[1,0:1])   ---100,200,300
+ 
+ 
+ 
+F.dataframe column conversion into array:
+
+employee=read_csv("")
+print(data)              --id,name,address
+
+d=numpy.array([employee['id']])
+
+
+print(d)     --1,2,3,4,,5,6,7,8
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+*************Sqlite3***************
+Python SQLite3 module is used to integrate the SQLite database with Python. 
+It is a standardized Python DBI API 2.0 and provides a straightforward and simple-to-use interface for interacting with SQLite databases. 
+There is no need to install this module separately as it comes along with Python after the 2.5x version.
+SQLite is used to develop embedded software for devices like televisions, cell phones, cameras, etc. 
+It can manage low to medium-traffic HTTP requests. 
+SQLite can change files into smaller size archives with lesser metadata. 
+SQLite is used as a temporary dataset to get processed with some data within an application.
+
+#How to load dataframes in sql database (sqlite3):-
+
+A. Dictionary
+>import pandas
+>d={"cal":[1,2,3],"nos":[100,200,300]}
+>data=pandas.DataFrame(d)
+>import sqlite3
+>conn=sqlite3.connect('Exponent.sqlite3')
+>data.to_sql('employee',conn,if_exists='replace',index=False)
+conn.close()
+***************data storage validation****************
+>conn=sqlite3.connect('Exponent.sqlite3')
+>df=pandas.read_sql_query('select * from employee',conn)
+>conn.close()
+>print(df)
+
+B. Txt file
+>import pandas
+>d=pandas.read_csv(r'C:\Users\AVITA\Desktop\Library install\employee.txt',sep=',',header=None,names=["id","name","address"])
+>data=pandas.DataFrame(d)
+>import sqlite3
+>conn=sqlite3.connect('Exponent.sqlite3')
+>data.to_sql('employee',conn,if_exists='replace',index=False)
+>conn.close()
+***************data storage validation****************
+>conn=sqlite3.connect('Exponent.sqlite3')
+>df=pandas.read_sql_query('select * from employee',conn)
+>conn.close()
+>print(df)
+***************to run another query****************
+>conn=sqlite3.connect('Exponent.sqlite3')
+>df=pandas.read_sql_query('select id,address from employee',conn)
+>conn.close()
+>print(df)
+***************to run another query****************
+>conn=sqlite3.connect('Exponent.sqlite3')
+>df=pandas.read_sql_query('select count(id) from employee',conn)
+>conn.close()
+>print(df)

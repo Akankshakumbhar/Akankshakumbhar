@@ -1,0 +1,264 @@
+1. label:- 
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+x=np.array([1,2,3,4])
+y=np.array([5,6,7,8])
+
+plt.plot(x,y)
+plt.xlabel("x data")
+plt.ylabel("y data")
+plt.show()
+
+
+2.title:- 
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+x=np.array([1,2,3,4])
+y=np.array([5,6,7,8])
+
+plt.plot(x,y)
+plt.title("vehicle data")
+plt.xlabel("x data")
+plt.ylabel("y data")
+plt.show()
+
+3.
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+x=np.array([1,2,3,4])
+y=np.array([5,6,7,8])
+
+font1={'family':'serif','color':'red','size':20}
+font2={'family':'serif','color':'blue','size':25}
+plt.plot(x,y)
+plt.title("vehicle data",fontdict=font1)
+plt.xlabel("x data",fontdict=font2)
+plt.ylabel("y data",fontdict=font2)
+plt.show()
+
+
+4.
+import numpy as np
+import matplotlib.pyplot as plt
+
+x=np.array([1,2,3,4])
+y=np.array([5,6,7,8])
+
+font1={'family':'serif','color':'red','size':20}
+font2={'family':'serif','color':'blue','size':25}
+plt.plot(x,y)
+plt.title("vehicle data",fontdict=font1,loc='left')
+plt.xlabel("x data",fontdict=font2)
+plt.ylabel("y data",fontdict=font2)
+plt.show()
+
+
+5.import numpy as np
+import matplotlib.pyplot as plt
+
+x=np.array([1,2,3,4])
+y=np.array([5,6,7,8])
+
+font1={'family':'serif','color':'red','size':20}
+font2={'family':'serif','color':'blue','size':25}
+plt.plot(x,y)
+plt.title("vehicle data",fontdict=font1,loc='left')
+plt.xlabel("x data",fontdict=font2)
+plt.ylabel("y data",fontdict=font2)
+plt.grid()
+plt.show()
+
+
+6.import numpy as np
+import matplotlib.pyplot as plt
+
+x=np.array([1,2,3,4])
+y=np.array([5,6,7,8])
+
+font1={'family':'serif','color':'red','size':20}
+font2={'family':'serif','color':'blue','size':25}
+plt.plot(x,y)
+plt.title("vehicle data",fontdict=font1,loc='left')
+plt.xlabel("x data",fontdict=font2)
+plt.ylabel("y data",fontdict=font2)
+plt.grid(axis='x')
+plt.show()
+
+
+7.
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+x=np.array([1,2,3,4])
+y=np.array([5,6,7,8])
+
+font1={'family':'serif','color':'red','size':20}
+font2={'family':'serif','color':'blue','size':25}
+plt.plot(x,y)
+plt.title("vehicle data",fontdict=font1,loc='left')
+plt.xlabel("x data",fontdict=font2)
+plt.ylabel("y data",fontdict=font2)
+plt.grid(color='green',axis='x',linewidth=0.5)
+plt.show()
+
+
+8.
+import numpy as np
+import matplotlib.pyplot as plt
+x=np.array([1,2,3])
+y=np.array([4,5,6])
+plt.subplot(1,2,1)
+plt.title("first")
+plt.plot(x,y)
+
+
+
+x=np.array([1,2,3])
+y=np.array([4,5,6])
+plt.subplot(1,2,2)
+plt.title("second")
+plt.plot(x,y)
+plt.show()
+
+
+9.
+
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+x=np.array([1,2,3])
+y=np.array([4,5,6])
+plt.subplot(2,1,1)
+plt.title("first")
+plt.plot(x,y)
+
+
+
+x=np.array([1,2,3])
+y=np.array([4,5,6])
+plt.subplot(2,1,2)
+plt.title("second")
+plt.plot(x,y)
+plt.show()
+
+10.Bar chart:-
+
+import numpy as np
+import matplotlib.pyplot as plt
+x=np.array(["a","b","c","d"])
+y=np.array([5,6,7,8])
+plt.bar(x,y)
+plt.show()
+
+
+11.
+import numpy as np
+import matplotlib.pyplot as plt
+x=np.array(["a","b","c","d"])
+y=np.array([5,6,7,8])
+plt.barh(x,y)
+plt.show()
+
+12.
+
+import numpy as np
+import matplotlib.pyplot as plt
+x=np.array(["a","b","c","d"])
+y=np.array([5,6,7,8])
+plt.barh(x,y,color='red')
+plt.show()
+
+13.
+
+import numpy as np
+import matplotlib.pyplot as plt
+x=np.array(["a","b","c","d"])
+y=np.array([5,6,7,8])
+plt.bar(x,y,color='red',width=0.2)
+plt.show()
+
+
+14.histogram:-
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+x=np.random.normal(170,10,250)
+
+plt.hist(x)
+plt.show()
+
+
+15.pie chart:-
+
+>>> import matplotlib.pyplot as plt
+>>> import numpy as np
+>>> x=np.array([12,20,30,80])
+>>> plt.pie(x)
+plt.show()
+
+
+16.
+
+import matplotlib.pyplot as plt
+import numpy as np
+x=np.array([12,20,30,80])
+mlabels=["a","b","c","d"]
+plt.pie(x,labels=mlabels)
+plt.show()
+
+
+17.
+
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+x=np.array([12,20,30,80])
+mlabels=["a","b","c","d"]
+myexplodes=[0.3,0.2,0,0]
+plt.pie(x,labels=mlabels,explode=myexplodes)
+plt.show()
+
+18.
+
+import matplotlib.pyplot as plt
+import numpy as np
+x=np.array([12,20,30,80])
+mlabels=["a","b","c","d"]
+myexplodes=[0.3,0.2,0,0]
+plt.pie(x,labels=mlabels,explode=myexplodes,shadow=True)
+plt.show()
+
+19.
+
+import matplotlib.pyplot as plt
+import numpy as np
+x=np.array([12,20,30,80])
+mlabels=["a","b","c","d"]
+myexplodes=[0.3,0.2,0,0]
+colors1=["orange","red","green","blue"]
+plt.pie(x,labels=mlabels,explode=myexplodes,shadow=True,colors=colors1)
+plt.show()
+
+
+20.
+
+import matplotlib.pyplot as plt
+import numpy as np
+x=np.array([12,20,30,80])
+mlabels=["a","b","c","d"]
+myexplodes=[0.3,0.2,0,0]
+colors1=["orange","red","green","blue"]
+plt.pie(x,labels=mlabels,explode=myexplodes,shadow=True,colors=colors1)
+plt.legend(title="students")
+plt.show()

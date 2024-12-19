@@ -1,0 +1,63 @@
+Data Analysis:-
+
+1.pandas
+2.duckdb
+3.numpy
+4.matplotlib
+5.beautiful soup (web scraping)
+
+
+
+****************************
+
+Web scraping:-  www.facebook.com -->data fetch (homepage-website header,website footer,website actaul content)
+
+Beautiful soup is used to fetch website data designed in html format.
+
+cmd>pip install requests
+
+>pip install html5lib
+>pip install bs4
+
+python> import requests
+>import html5lib 
+>from bs4 import BeautifulSoup
+
+
+>data="https://www.value.com/inspirational-quotes"
+r=requests.get(data)
+print(r.content)
+
+>soup=BeautifulSoup(r.content,'html5lib')
+ print(soup.prettify())
+
+
+q=[]
+
+>table=soup.findAll('div',attrs={'id':'all_quotes'})
+
+>for i in table:
+                p={}
+				p['url']=i.a['href']
+				q.append(p)
+
+
+>print(q)
+
+
+
+
+************************************
+
+data entry operators-->website data fetch-->excel  -->10 /day
+digital marketing-->web data fetch -->excel 
+
+
+
+
+
+
+
+
+
+

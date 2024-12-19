@@ -1,0 +1,80 @@
+
+
+********Machine learning*************************
+
+
+pip install scikit-learn
+
+1.implementing the decision tree we will go through the following two phases:
+
+ A.Building Phase
+        Preprocess the dataset.
+        Split the dataset from train and test using Python sklearn package.
+        Train the classifier.
+ 
+ B.Operational Phase
+        Make predictions.
+        Calculate the accuracy.
+
+
+2. Before training the model we have to split the dataset into the training and testing dataset using train_test_split.
+
+
+3. First of all we have to separate the target variable from the attributes in the dataset.
+
+X = balance_data.values[:, 1:5]
+Y = balance_data.values[:,0]
+
+
+
+4. Above are the lines from the code which separate the dataset. The variable X contains the attributes while the variable Y contains the target variable of the dataset.
+
+
+5. Next step is to split the dataset for training and testing purpose.
+
+
+X_train, X_test, y_train, y_test = train_test_split( 
+          X, Y, test_size = 0.3, random_state = 100)
+		  
+		  
+Above line split the dataset for training and testing. As we are splitting the dataset in a ratio of 70:30 between training and testing so we are pass test_size parameter’s value as 0.3
+
+e.g:-
+
+
+
+#Three lines to make our compiler able to draw:
+import sys
+import matplotlib
+matplotlib.use('Agg')
+
+import pandas
+from sklearn import tree
+from sklearn.tree import DecisionTreeClassifier
+import matplotlib.pyplot as plt
+
+df = pandas.read_csv(r"C:\Users\admin\Desktop\Machine_learning_EXP\Decision_tree_data.csv")
+
+d = {'UK': 0, 'USA': 1, 'N': 2}
+df['Nationality'] = df['Nationality'].map(d)
+d = {'YES': 1, 'NO': 0}
+df['Go'] = df['Go'].map(d)
+
+features = ['Age', 'Experience', 'Rank', 'Nationality']
+
+X = df[features]
+y = df['Go']
+
+dtree = DecisionTreeClassifier()
+dtree = dtree.fit(X, y)
+
+tree.plot_tree(dtree, feature_names=features)
+
+
+Note:
+1.all columns records should be in int datatypes(numbers)
+
+
+
+
+

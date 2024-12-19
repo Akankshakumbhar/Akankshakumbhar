@@ -1,0 +1,69 @@
+KNN
+
+KNN is a simple, supervised machine learning (ML) algorithm that can be used for classification or regression tasks - and is also frequently used in missing value imputation.
+
+
+2.It is based on the idea that the observations closest to a given data point are the most "similar" observations in a data set, and we can therefore classify unforeseen points based on the values of the closest existing points. By choosing K, the user can select the number of nearby observations to use in the algorithm.
+
+ chain:- data storage-->validation-->model -->prediction
+
+import matplotlib.pyplot as plt
+from sklearn.neighbors import KNeighborsClassifier
+
+####We have two input features (x and y) and then a target class (class).
+
+x = [4, 5, 10, 4, 3, 11, 14 , 8, 10, 12]
+y = [21, 19, 24, 17, 16, 25, 24, 22, 21, 21]
+classes = [0, 0, 1, 0, 0, 1, 1, 0, 1, 1]
+
+#Turn the input features into a set of points:
+
+data = list(zip(x, y))
+print(data) 
+
+#Using the input features and target class, we fit a KNN model on the model using 1 nearest neighbor:
+
+knn = KNeighborsClassifier(n_neighbors=1)
+knn.fit(data, classes) 
+
+#Then, we can use the same KNN object to predict the class of new, unforeseen data points. First we create new x and y features, and then call knn.predict() on the new data point to get a class of 0 or 1:
+
+new_x = 8
+new_y = 21
+new_point = [(new_x, new_y)]
+prediction = knn.predict(new_point)
+print(prediction)                               ---[0] 	
+
+
+
+######When we plot all the data along with the new point and class, we can see it's been labeled blue with the 1 class. The text annotation is just to highlight the location of the new point:
+
+
+
+plt.scatter(x + [new_x], y + [new_y], c=classes + [prediction[0]])
+plt.text(x=new_x-1.7, y=new_y-0.7, s=f"new point, class: {prediction[0]}")
+plt.show() 
+
+
+###However, when we changes the number of neighbors to 5, the number of points used to classify our new point changes. As a result, so does the classification of the new point:
+
+
+
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(data, classes)
+prediction = knn.predict(new_point)
+print(prediction)                                     -----[1] 
+
+
+####When we plot the class of the new point along with the older points, we note that the color has changed based on the associated class label:
+
+
+plt.scatter(x + [new_x], y + [new_y], c=classes + [prediction[0]])
+plt.text(x=new_x-1.7, y=new_y-0.7, s=f"new point, class: {prediction[0]}")
+plt.show()
+
+
+e.g
+rank-1,2,3,4
+position-m,ba,jds,dev
+salary  -100000,20000,10000,?

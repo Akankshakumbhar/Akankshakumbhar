@@ -1,0 +1,73 @@
+CNN
+1.In deep learning, a convolutional neural network (CNN/ConvNet) is a class of deep neural networks, most commonly applied to analyze visual imagery. Now when we think of a neural network we think about matrix multiplications but that is not the case with ConvNet.
+
+2.A Convolutional Neural Network (CNN) is a type of deep learning algorithm that is particularly well-suited for image recognition and processing tasks.
+3.It is made up of multiple layers, including convolutional layers, pooling layers, and fully connected layers.
+
+Image recognisition --->sentence
+
+data ----images
+
+4.The MNIST database is a large database of handwritten digits that is commonly used for training various image processing systems. The database is also widely used for training and testing in the field of machine learning
+
+5.Torch is an open source ML library used for creating deep neural networks and is written in the Lua scripting language.
+
+6.TorchVision is a library within PyTorch for image and video processing, it contains a number of important and useful data sets, model architecture, as well as models and transformation operations that are commonly used for computer vision projects
+
+import torch
+import matplotlib.pyplot as plt
+import numpy as np
+from torchvision import datasets, transforms
+
+transform1 = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
+
+step 2:
+
+In the second step, we load the MNIST dataset using the MNIST () method of datasets. In the first argument, we specified the root directory of our data as following,
+
+In the second argument, we set train='true'. We will do this to initialize the MNIST training dataset. After that, we set download ='true' and this will download a list into the data folder if it's not already there.
+
+
+The last argument will be transform which is equal to transform1 argument that will initialize before the training_dataset. This argument dictates any image manipulation which you wish to apply on your images. 
+
+training_dataset = datasets.MNIST(root=r'.\data', train=True, download=True,
+                                  transform=transform1)
+								  
+								  Now, we plot our MNIST dataset for better visualization. We will start by loading the image from training_loader(). The training loader is what we used to specify our training batches previously when training our neural network. For every epoch, we performed a single pass through the entire dataset. However, one epoch with sixty thousand training images would be too big to fit the computer all at once. So we will divide it into smaller batches using our train loader as:
+								  
+training_loader = torch.utils.data.DataLoader(dataset=training_dataset, batch_size=100, shuffle=True)
+
+We will further analyze images within this dataset by plotting it. To plot the tensor image, we must change it back to numpy array. We will do this work in a function def im_convert() contain one parameter which will be our tensor image.
+
+Before converting tensor to numpy array, first, we will clone it. It will create a new copy of tensor, and then we use the detach() function and then we will use numpy as:
+
+For plotting our image, it is required that the image have a shape of (28, 28, 1). So, we will transpose our image by swapping axis zero, one, and two as:
+
+In the next step, we de-normalized the image which we have to normalize before. Normalization is done by subtracting the mean and dividing by the standard deviation. We would multiply by the standard deviation and add the mean as:
+
+To ensure that the range between 0 and 1, we used clip() function and pass zero and one as an argument. We will apply the clip function to a minimum value of 0 and the maximum value of 1 and return the image. 
+
+A tensor can be a generic structure that can be used for storing, representing, and changing data.
+
+def im_convert(tensor):
+    image = tensor.clone().detach().numpy()
+    image = image.transpose(1, 2, 0)
+    print(image.shape)
+    image = image * (np.array((0.5, 0.5, 0.5)) + np.array((0.5, 0.5, 0.5)))
+    image = image.clip(0, 1)
+    return image
+
+, we plot 20 MNIST images from our batch. We use add_subplot() method to add a subplot to the current figure and pass 2, 10, and idx as arguments of the function. Here two is no of rows, ten is no of columns, and idx is index.
+
+
+dataiter = iter(training_loader)
+images, labels = dataiter.__next__()
+fig = plt.figure(figsize=(25, 4))
+for idx in np.arange(20):
+    ax = fig.add_subplot(2, 10, idx + 1)
+    plt.imshow(im_convert(images[idx]))
+    ax.set_title([labels[idx].item()])
+plt.show()
+
+
+
