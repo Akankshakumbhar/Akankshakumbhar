@@ -1,0 +1,195 @@
+
+-- create
+create table ak(id int,name varchar(30),age int);
+insert into ak values(1,'aks',22);
+insert into ak values(2,'sd',21);
+insert into ak values(14,'sd',22);
+select * from ak;
+select name from ak ;
+select * from ak where name='sd';
+select age,name from ak;
+select * from ak where name='aks' and age=22;
+select * from ak order by name desc;
+select * from ak order by age ;
+
+select * from ak limit 2;
+
+
+
+create table pernalinfo(id int ,name varchar(20),adress varchar(50),annualsalary int);
+insert into pernalinfo values(1,'aknksha','pune ',20000);
+insert into pernalinfo values(2,'aum','mumbai ',500000);
+insert into pernalinfo values(3,'pravin','pen ',60000);
+insert into pernalinfo values(4,'sammy','pcmc ',10000);
+insert into pernalinfo values(5,'deeps','wakad ',220000);
+insert into pernalinfo values(6,'gauri','pcmc ',30000);
+insert into pernalinfo values(7,'shiv',' penvel',40000);
+insert into pernalinfo values(8,'divya',' nigdi ',60000);
+insert into pernalinfo values(9,'pankaj',' bhosri ',70000);
+insert into pernalinfo values(10,'amey',' nigdi ',80000);
+select * from pernalinfo;
+select annualsalary from pernalinfo;
+select max(annualsalary) from pernalinfo;
+select max(id)from pernalinfo;
+select min(id)from pernalinfo;
+select sum(id) from pernalinfo;
+alter table pernalinfo add lastname  varchar(100) after name;
+
+
+show databases;
+update pernalinfo set adress='pcmc' where id=1;
+select * from pernalinfo;
+delete from pernalinfo where id =2;
+select * from pernalinfo;
+truncate table pernalinfo;
+select* from pernalinfo;
+drop table pernalinfo;
+select * from pernalinfo;
+  
+  
+  
+  
+  
+  
+create table employee(id int,fname varchar(30),lname varchar(25),email varchar(25),phone_no varchar(10),hire_date date,jod_id varchar(10),salary int,commission_pct int,manager_id int,department_id int);
+insert into employee values(1,'aum','kumbhar','aum6@gmail.com','9980761415','1987-06-17','1234',20000,1345,56,123);
+insert into employee values(2,'akanksha','kumbhar','akanksha6@gmail.com','9960761415','1987-07-17','12344',30000,13465,567,1253);
+insert into employee values(3,'gauri','kumbhar','gauri6@gmail.com','9980561415','1987-01-19','1204',50000,13465,567,1233);
+insert into employee values(4,'deepali','pawar','deepali6@gmail.com','9980701415','1983-01-17','12534',60000,13445,563,1213);
+
+
+
+
+create table employee(id int,fname varchar(30),lname varchar(25),email varchar(25),phone_no varchar(10),hire_date date,jod_id varchar(10),salary int,commission_pct int,manager_id int,department_id int);
+insert into employee values(1,'aum','kumbhar','aum6@gmail.com','9980761415','1987-06-17','1234',20000,1345,56,123);
+insert into employee values(2,'akanksha','kumbhar','akanksha6@gmail.com','9960761415','1987-07-17','12344',30000,13465,567,1253);
+insert into employee values(3,'gauri','kumbhar','gauri6@gmail.com','9980561415','1987-01-19','1204',50000,13465,567,1233);
+insert into employee values(4,'deepali','pawar','deepali6@gmail.com','9980701415','1983-01-17','12534',60000,13445,563,1213);
+
+create table department(id int,name varchar(20),demployee varchar(20));
+
+
+
+select * from employee;
+select  salary,email,manager_id from employee;
+ 
+select fname from employee  order by id asc;
+select lname from employee  group by lname;
+select * from employee limit 2;
+select  count(*) from employee;
+select count(id) from employee;
+select max(id) from employee;
+select department_id,max(salary) from employee group by department_id ;
+select *from employee order by salary asc limit 2;
+select  fname, reverse(fname) from employee ;
+select lname,email,reverse(lname),reverse(email) from employee;
+select reverse(lname) from employee where lname='pawar';
+select * from employee where hire_date >5;
+select min(salary),max(salary) from employee;
+select hire_date ,count(id) from employee group by hire_date;
+select count(id)from employee order by  manager_id desc;
+select sum(salary) from employee;
+select salary/12 from employee;
+select fname ,min(salary) from employee group by fname limit 2;
+select fname,max (salary) from employee where group by fname;
+
+
+
+
+
+
+
+//problem statement///
+Product table (10 records)
+
+productid productname orderid quantity sales price year oaddress
+
+
+1.Find out top 2 product with maximun revenue?
+
+2.count the number of cities with maximum sales?     1000
+
+3.count the number of product based on cities?
+
+pune     30
+mumbai    40 
+
+4.findout total revenue based on year?
+
+2012    100000
+2013    20000000
+2014     3000000
+
+
+
+
+CREATE TABLE product (
+  pid INTEGER PRIMARY KEY,
+  name TEXT NOT NULL,
+  orderid int NOT NULL,
+  quantity int,sales int,price int,year int  ,city text
+);
+
+-- insert
+INSERT INTO product VALUES (0001, 'pen', 123,2,24,34,2012,'pune');
+INSERT INTO product VALUES (0002, 'pencil',23,4,65,20,2034, 'mumbai');
+INSERT INTO product VALUES (0003, 'pencil',237,41,65,209,2034, 'mumbai');
+
+
+-- fetch 
+SELECT * FROM product;
+
+select name from product order by price  desc limit 1;
+
+select count(city) ,sales from product group by sales order by sales desc limit 2;
+select count(city),max(sales) as t from product group by city order by t desc;
+select count(*) ,city from product  group by city;
+select sum(price),year from product group by year;
+
+
+
++-----+--------+---------+----------+-------+-------+------+--------+
+| pid | name   | orderid | quantity | sales | price | year | city   |
++-----+--------+---------+----------+-------+-------+------+--------+
+|   1 | pen    |     123 |        2 |    24 |    34 | 2012 | pune   |
+|   2 | pencil |      23 |        4 |    65 |    20 | 2034 | mumbai |
+|   3 | pencil |     237 |       41 |    65 |   209 | 2034 | mumbai |
++-----+--------+---------+----------+-------+-------+------+--------+
++--------+
+| name   |
++--------+
+| pencil |
++--------+
++-------------+-------+
+| count(city) | sales |
++-------------+-------+
+|           2 |    65 |
+|           1 |    24 |
++-------------+-------+
++-------------+------+
+| count(city) | t    |
++-------------+------+
+|           2 |   65 |
+|           1 |   24 |
++-------------+------+
++----------+--------+
+| count(*) | city   |
++----------+--------+
+|        1 | pune   |
+|        2 | mumbai |
++----------+--------+
++------------+------+
+| sum(price) | year |
++------------+------+
+|         34 | 2012 |
+|        229 | 2034 |
++------------+------+
+ 
+
+
+
+
+
+
+
+
